@@ -28,8 +28,14 @@ var percent_f = function(){
 
 var percent_male = function(){
     return 100 - percent_f();
+}
 
+var num_minors = function(){
+    var minors = pop_data.filter(function(n){ return n["age"] < 18;});
+    var total = minors.map(function(n) {return n["total"];});
+    return total.reduce(function(a,b) {return a + b;});
 }
 
 console.log(mean_age())
 console.log(percent_f())
+console.log(num_minors())
