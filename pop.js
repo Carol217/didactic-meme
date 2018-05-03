@@ -20,7 +20,7 @@ var mean_age = function(){
     var sum_total = total.reduce(function(a,b) {return a + b;}) //total number of people in the data
     var age = pop_data.map(function(n) {return n["total"] * n["age"];}) //list of all total populations multiplied by their respective age
     var sum_age = age.reduce(function(a,b) {return a + b;}) //total age multiplied by its respective total populations
-    return Math.round(sum_age / sum_total)
+    return (sum_age / sum_total).toFixed(2)
 }
 
 //calculates the percent composition of females in the data
