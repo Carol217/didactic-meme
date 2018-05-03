@@ -10,32 +10,52 @@ var population = '[{"females": 1858000, "country": "United States", "age": 0, "m
 
 var pop_data = JSON.parse(population)
 
+var year = 1990 //variable for year being used (in case you want to adjust it with new data)
+
+//calculates the mean age of the data
+//  adds up all ages times their respective total populations
+//  divides the total by the total number of people
 var mean_age = function(){
-    var total = pop_data.map(function(n) {return n["total"];})
-    var sum_total = total.reduce(function(a,b) {return a + b;})
-    var age = pop_data.map(function(n) {return n["total"] * n["age"];})
-    var sum_age = age.reduce(function(a,b) {return a + b;})
+    var total = pop_data.map(function(n) {return n["total"];}) //list of all total populations by age
+    var sum_total = total.reduce(function(a,b) {return a + b;}) //total number of people in the data
+    var age = pop_data.map(function(n) {return n["total"] * n["age"];}) //list of all total populations multiplied by their respective age
+    var sum_age = age.reduce(function(a,b) {return a + b;}) //total age multiplied by its respective total populations
     return Math.round(sum_age / sum_total)
 }
 
+//calculates the percent composition of females in the data
+//  adds up all total populations to get overall population
+//  divides the total by the sum of the number of females for all ages
 var percent_f = function(){
-    var total = pop_data.map(function(n) {return n["total"];})
-    var sum_total = total.reduce(function(a,b) {return a + b;})
-    var f = pop_data.map(function(n) {return n["females"];});
-    var sum_f = f.reduce(function(a,b) {return a + b;})
+    var total = pop_data.map(function(n) {return n["total"];}) //list of all total populations by age
+    var sum_total = total.reduce(function(a,b) {return a + b;}) //total number of people in the data
+    var f = pop_data.map(function(n) {return n["females"];}); //list of all female populations by age 
+    var sum_f = f.reduce(function(a,b) {return a + b;}) //total number of females in the data
     return sum_f/sum_total * 100
 }
 
-var percent_male = function(){
+//calculates the percent composition of males in the data
+//  subtracts the female percentage from 100
+var percent_m = function(){
     return 100 - percent_f();
 }
 
+//calculates the number of minors in the data
+//  adds up all total populations from ages 0-18
 var num_minors = function(){
-    var minors = pop_data.filter(function(n){ return n["age"] < 18;});
-    var total = minors.map(function(n) {return n["total"];});
+    var minors = pop_data.filter(function(n){ return n["age"] < 18;}); //list of all minor populations by age
+    var total = minors.map(function(n) {return n["total"];}); //total number of minors in the data
     return total.reduce(function(a,b) {return a + b;});
 }
 
-console.log(mean_age())
-console.log(percent_f())
-console.log(num_minors())
+//diagnostic console logs
+console.log("mean age: " + mean_age())
+console.log("percent females: " + percent_f())
+console.log("percent males: " + percent_m())
+console.log("number of minors: " + num_minors())
+
+//appends data to HTML elements
+document.getElementById("title").innerHTML = "US Population Central Tendencies from " + year
+document.getElementById("mean_age").innerHTML = mean_age()
+document.getElementById("gender_ratio").innerHTML = percent_f().toFixed(2) + " : " + percent_m().toFixed(2)
+document.getElementById("minors").innerHTML = num_minors()

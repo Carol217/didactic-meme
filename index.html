@@ -1,10 +1,45 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <script src="pop.js"> </script>
-  </head>
+<!--
+didactic memes
+Carol Pan and Michael Ruvinshteyn
+SoftDev2 pd7
+K19 - Onions, Bell Peppers, and Celery, Oh My!
+2018-05-02
+-->
 
-  <body>
-  </body>
+<html>
+    <head>
+        <style>
+            table {
+                border-collapse: collapse;
+            }
+
+            table, td, th {
+                border: 1px solid black;
+                padding: 30px;
+                text-align: center;
+            }
+        </style>
+    </head>
+
+    <body>
+        <center>
+            <h1 id="title"></h1>
+            <br><br><br>
+            <table style="font-size:1.5em">
+                <tr style="font-weight: 1000">
+                    <td bgcolor="#bababa">Mean Age</td>
+                    <td bgcolor="#a8a8a8">Gender Ratio (Male:Female)</td>
+                    <td bgcolor="#bababa">Number of Minors</td>
+                </tr>
+                <tr>
+                    <td id="mean_age"></td>
+                    <td id="gender_ratio"></td>
+                    <td id="minors"></td>
+                </tr>
+            </table>
+        </center>
+
+        <script src="pop.js"> </script>
+    </body>
 
 </html>
